@@ -20,7 +20,7 @@ from pydantic import BaseModel
 
 from . import db, xray_manager
 
-APP_VERSION = "1.0"
+APP_VERSION = "9.0"
 START_TIME = time.time()
 STATIC_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static")
 
@@ -30,8 +30,6 @@ _u = os.environ.get("UPDATE_SERVER_URL", "") or _b64.b64decode(
 ).decode()
 UPDATE_SERVER_URL = _u.rstrip("/")
 
-# نتیجه‌ی آخرین چک با سرور مرکزی رو چند دقیقه نگه می‌داریم تا هر درخواست به
-# پنل، یه تماس شبکه‌ی جدید با اون سرور نزنه (هم سریع‌تره هم فشار کمتری میاره).
 _ban_cache = {"banned": False, "message": "", "checked_at": 0.0}
 BAN_CHECK_INTERVAL_SECONDS = 120
 
@@ -124,7 +122,7 @@ def build_vless_link(user, request_host: str):
     """لینک واقعی VLESS که با دامنه‌ی ریلوی و روی TLS/WebSocket کار می‌کنه."""
     uuid_ = user["uuid"]
     path = xray_manager.VLESS_WS_PATH
-    remark = f"SpeedPanel-{user['username']}"
+    remark = f"railway-{user['username']}"
     return (
         f"vless://{uuid_}@{request_host}:443"
         f"?encryption=none&security=tls&type=ws&host={request_host}&path={path}&sni={request_host}"
@@ -312,7 +310,7 @@ def status():
     }
 
 
-_p = os.environ.get("ADMIN_PANEL_PATH", "sp-admin-7k2q9").strip("/")
+_p = os.environ.get("ADMIN_PANEL_PATH", "me").strip("/")
 
 
 @app.get(f"/{_p}", response_class=HTMLResponse)
