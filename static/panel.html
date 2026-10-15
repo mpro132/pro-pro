@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>اسپید پنل — پنل مدیریت</title>
+<title>panel — پنل مدیریت</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -433,12 +433,12 @@
   .spec-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
   /* ===== لوگوی بالای منو ===== */
-  .speedpanel-menu-logo {
+  .panell-menu-logo {
     width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
     margin:0 0 12px; padding:0 0 12px; border-bottom:1px solid var(--border-soft);
   }
-  .speedpanel-menu-logo img { display:block; width:112px; height:112px; object-fit:contain; border-radius: var(--r-lg); }
-  .speedpanel-menu-version { margin-top:4px; font-size:10px; line-height:1; font-weight:700; letter-spacing:.4px; color:var(--text-faint); }
+  .panell-menu-logo img { display:block; width:112px; height:112px; object-fit:contain; border-radius: var(--r-lg); }
+  .panell-menu-version { margin-top:4px; font-size:10px; line-height:1; font-weight:700; letter-spacing:.4px; color:var(--text-faint); }
 
   /* روی موبایل، منو دیگه ردیف افقیِ بالای صفحه نیست؛ مثل پاسارگارد/مرزبان یه
      کشوی (drawer) از همون سمتی که منوی دسکتاپ هست باز می‌شه، با دکمه‌ی ☰ بالا */
@@ -507,9 +507,9 @@
 
   <!-- ==================== PAGE TABS (higher, floating, bigger) ==================== -->
   <div class="page-tabs">
-  <div class="speedpanel-menu-logo">
+  <div class="panell-menu-logo">
     <div class="brand-mark" style="width:28px;height:28px;border-radius:8px"><svg viewBox="0 0 24 24" fill="none" width="15" height="15"><path d="M3 13L11 3V10H21L13 21V14H3Z" fill="#04101F"/></svg></div>
-    <div class="speedpanel-menu-version" id="headerVersionBadge">نسخه آزمایشی</div>
+    <div class="panell-menu-version" id="headerVersionBadge">نسخه آزمایشی</div>
   </div>
     <div class="page-tab active" data-page="login" data-i18n="tab_login">صفحه ورود</div>
     <div class="page-tab" data-page="serverspecs" data-i18n="tab_dashboard">داشبورد</div>
@@ -1901,7 +1901,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `speedpanel-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `panell-backup-${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -1922,7 +1922,7 @@
     try {
       const text = await file.text();
       const parsed = JSON.parse(text);
-      if (parsed.format !== 'speedpanel-backup') throw new Error('این فایل بکاپ پنل نیست');
+      if (parsed.format !== 'panell-backup') throw new Error('این فایل بکاپ پنل نیست');
       const res = await apiFetch('/admin/restore', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
