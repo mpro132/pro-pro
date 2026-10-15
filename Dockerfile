@@ -1,13 +1,11 @@
 FROM python:3.11-slim
 
-# nginx: جلوی در، هم پنل هم ترافیک VPN رو مسیریابی می‌کنه
-# curl/unzip: برای دانلود باینری واقعی Xray-core
-# gettext-base: برای envsubst (جایگزینی $PORT توی تنظیمات nginx)
+# nginx
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx curl unzip gettext-base ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# دانلود آخرین نسخه‌ی پایدار Xray-core (باینری رسمی از گیت‌هاب XTLS)
+# panel
 RUN curl -L -o /tmp/xray.zip \
     https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip \
     && unzip /tmp/xray.zip -d /tmp/xray \
